@@ -19,3 +19,4 @@ JuniperDevices:
     #Had to create a new user called admin because root does not have ssh access rights.
     #Had to install sshpass on computer.
     #Had to specifiy ssh cryptography as Lab Ubuntu machines dont support those old ones by default.
+    #Trying to test with command ansible -i inventory.yaml -m raw -a "set interfaces em0 unit 0 family inet address 192.168.1.1/24" J1
