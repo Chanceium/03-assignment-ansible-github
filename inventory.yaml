@@ -16,4 +16,6 @@ JuniperDevices:
       ansible_user: admin
       ansible_ssh_pass: telecomS144
       ansible_ssh_common_args: '-o KexAlgorithms=+diffie-hellman-group1-sha1'
-    
+    #Had to create a new user called admin because root does not have ssh access rights.
+    #Had to install sshpass on computer.
+    #Had to specifiy ssh cryptography as Lab Ubuntu machines dont support those old ones by default.
