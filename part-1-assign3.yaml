@@ -1,11 +1,6 @@
 ---
 - name: Assignment 3 Part 1
-  hosts: AristaDevices
+  hosts: JuniperDevices
   tasks:
     - name: Setting Hostnames
       command: hostname {{ inventory_hostname }}
-
-    - name: Setting Strong Password
-      user:
-        name: root
-        password: "{{ 'telecomS144' | password_hash('sha512') }}"
