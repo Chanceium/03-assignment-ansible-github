@@ -4,8 +4,11 @@ JuniperDevices:
   hosts:
     J1:
       ansible_host: 192.168.122.2
+      ansible_ssh_pass: telecomS144
     J2:
       ansible_host: 192.168.122.3
+      ansible_ssh_pass: telecomS144
     J3:
       ansible_host: 192.168.122.4
+      ansible_ssh_pass: telecomS144
     
