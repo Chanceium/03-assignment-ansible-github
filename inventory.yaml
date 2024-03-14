@@ -1,14 +1,16 @@
 # inventory.yaml
-
 JuniperDevices:
   hosts:
     J1:
       ansible_host: 192.168.122.2
       ansible_ssh_pass: telecomS144
+      ansible_ssh_common_args: '-o KexAlgorithms=+diffie-hellman-group1-sha1'
     J2:
       ansible_host: 192.168.122.3
       ansible_ssh_pass: telecomS144
+      ansible_ssh_common_args: '-o KexAlgorithms=+diffie-hellman-group1-sha1'
     J3:
       ansible_host: 192.168.122.4
       ansible_ssh_pass: telecomS144
+      ansible_ssh_common_args: '-o KexAlgorithms=+diffie-hellman-group1-sha1'
     
