@@ -24,4 +24,4 @@ jobs:
         pip install ansible
 
     - name: Run Ansible Playbook
-      run: ansible-playbook --ask-vault-pass -i inventory.ini run_network_config.yaml 
+      run: ansible-playbook --vault-password-file vault_password.txt -i inventory.ini run_network_config.yaml
