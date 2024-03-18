@@ -1,5 +1,6 @@
 #run_network_config.yaml
 ---
 - hosts: Routers
+  gather_facts: no
   roles:
     - network_config
