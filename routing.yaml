@@ -1,0 +1,44 @@
+#routing_protocol_setup
+---
+- name: routing_protocol_setup
+  hosts: Routers
+  gather_facts: no
+
+  tasks:
+
+    - name: Configure OSPF on R1
+      ios_config:
+        lines:
+          - interface G0/0
+          - ip ospf 1 area 0
+          - interface G0/0.10
+          - ip ospf 1 area 0
+      when: inventory_hostname == 'R1'
+
+    - name: Configure OSPF on R2
+      ios_config:
+        lines:
+          - interface G0/0
+          - ip ospf 1 area 0
+          - interface G0/0.10
+          - ip ospf 1 area 0
+          - interface G1/0
+          - ip ospf 1 area 0
+          - interface G1/0.20
+          - ip ospf 1 area 0
+      when: inventory_hostname == 'R2'
+
+    - name: Configure OSPF on R3
+      ios_config:
+        lines:
+          - interface G1/0
+          - ip ospf 1 area 0
+          - interface G1/0.20
+          - ip ospf 1 area 0
+      when: inventory_hostname == 'R3'
+
+    - name: Writing to memory
+      ios_config:
+        lines:
+          - do write memory
+
