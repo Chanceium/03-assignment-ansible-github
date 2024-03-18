@@ -56,7 +56,7 @@
         src: /tmp/interface_config.cfg
       when: inventory_hostname == 'R1'
 
-    - name: Configure R2
+    - name: Configure R2 Interface
       template:
         src: templates/interface_config.j2
         dest: /tmp/interface_config.cfg
@@ -66,6 +66,44 @@
         subnet_mask: "255.255.255.252"
     - ios_config:
         src: /tmp/interface_config.cfg
+      when: inventory_hostname == 'R2'
+
+    - name: Configure R2 Interface
+      template:
+        src: templates/interface_config.j2
+        dest: /tmp/interface_config.cfg
+      vars:
+        interface: "G1/0"
+        ip_address: "100.64.2.1"
+        subnet_mask: "255.255.255.252"
+    - ios_config:
+        src: /tmp/interface_config.cfg
+      when: inventory_hostname == 'R2'
+
+    - name: Configure R2 VLAN
+      template:
+        src: templates/vlan_config.j2
+        dest: /tmp/vlan_config.cfg
+      vars:
+        interface: "G0/0.10"
+        vlan_id: "10"
+        ip_address: "192.168.10.2"
+        subnet_mask: "255.255.255.0"
+    - ios_config:
+        src: /tmp/vlan_config.cfg
+      when: inventory_hostname == 'R2'
+
+    - name: Configure R2 VLAN
+      template:
+        src: templates/vlan_config.j2
+        dest: /tmp/vlan_config.cfg
+      vars:
+        interface: "G0/0.20"
+        vlan_id: "20"
+        ip_address: "192.168.20.1"
+        subnet_mask: "255.255.255.0"
+    - ios_config:
+        src: /tmp/vlan_config.cfg
       when: inventory_hostname == 'R2'
 
     - name: Configure R3
@@ -86,4 +124,3 @@
         dest: /tmp/write_memory.cfg
     - ios_config:
         src: /tmp/write_memory.cfg
-
