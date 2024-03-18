@@ -98,7 +98,7 @@
         src: templates/vlan_config.j2
         dest: /tmp/vlan_config.cfg
       vars:
-        interface: "G0/0.20"
+        interface: "G1/0.20"
         vlan_id: "20"
         ip_address: "192.168.20.1"
         subnet_mask: "255.255.255.0"
@@ -118,6 +118,19 @@
         src: /tmp/interface_config.cfg
       when: inventory_hostname == 'R3'
 
+    - name: Configure R3 VLAN
+      template:
+        src: templates/vlan_config.j2
+        dest: /tmp/vlan_config.cfg
+      vars:
+        interface: "G1/0.20"
+        vlan_id: "20"
+        ip_address: "192.168.20.2"
+        subnet_mask: "255.255.255.0"
+    - ios_config:
+        src: /tmp/vlan_config.cfg
+      when: inventory_hostname == 'R3'
+    
     - name: Writing to memory
       template:
         src: templates/write_memory.j2
