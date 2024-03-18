@@ -1,6 +1,5 @@
 # network_config/defaults/main.yaml
 ---
-username: "chance"
-user_password: "telecomS144"
-enable_password: "telecomS144"
-
+username: "{{ vault_username }}"
+user_password: "{{ vault_user_password }}"
+enable_password: "{{ vault_enable_password }}"

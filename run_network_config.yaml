@@ -1,5 +1,7 @@
 #run_network_config.yaml
 ---
 - hosts: Routers
+  vars_files:
+    - secret_vars.yaml
   roles:
     - network_config
