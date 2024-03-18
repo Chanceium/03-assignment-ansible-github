@@ -1,0 +1,8 @@
+{% for router in routers %}
+{% for interface in router.interfaces %}
+interface {{ interface.interface }}
+ ip address {{ interface.ip_address }} {{ interface.subnet_mask }}
+ no shutdown
+{% endfor %}
+{% endfor %}
+

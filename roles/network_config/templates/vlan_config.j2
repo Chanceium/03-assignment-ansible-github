@@ -1,0 +1,8 @@
+{% for router in routers %}
+{% for vlan_interface in router.vlan_interfaces %}
+interface {{ vlan_interface.interface }}
+ encapsulation dot1Q {{ vlan_interface.vlan_id }}
+ ip address {{ vlan_interface.ip_address }} {{ vlan_interface.subnet_mask }}
+{% endfor %}
+{% endfor %}
+

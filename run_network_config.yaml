@@ -1,0 +1,5 @@
+#run_network_config.yaml
+---
+- hosts: Routers
+  roles:
+    - network_config

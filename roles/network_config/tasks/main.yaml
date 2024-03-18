@@ -1,0 +1,64 @@
+#/tasks/main.yml
+---
+- name: Change hostname
+  template:
+    src: templates/hostname.j2
+    dest: /tmp/hostname.cfg
+- ios_config:
+    src: /tmp/hostname.cfg
+
+- name: Set local password
+  template:
+    src: templates/local_password.j2
+    dest: /tmp/local_password.cfg
+- ios_config:
+    src: /tmp/local_password.cfg
+
+- name: Configure SSH and disable Telnet
+  template:
+    src: templates/ssh_config.j2
+    dest: /tmp/ssh_config.cfg
+- ios_config:
+    src: /tmp/ssh_config.cfg
+
+- name: Limit console and VTY access
+  template:
+    src: templates/access_limit.j2
+    dest: /tmp/access_limit.cfg
+- ios_config:
+    src: /tmp/access_limit.cfg
+
+- name: Configure logging and timestamps
+  template:
+    src: templates/logging_config.j2
+    dest: /tmp/logging_config.cfg
+- ios_config:
+    src: /tmp/logging_config.cfg
+
+- name: Configure interfaces
+  template:
+    src: templates/interface_config.j2
+    dest: /tmp/interface_config.cfg
+- ios_config:
+    src: /tmp/interface_config.cfg
+
+- name: Configure VLANs
+  template:
+    src: templates/vlan_config.j2
+    dest: /tmp/vlan_config.cfg
+- ios_config:
+    src: /tmp/vlan_config.cfg
+
+- name: Configure OSPF
+  template:
+    src: templates/ospf_config.j2
+    dest: /tmp/ospf_config.cfg
+- ios_config:
+    src: /tmp/ospf_config.cfg
+
+- name: Writing to memory
+  template:
+    src: templates/write_memory.j2
+    dest: /tmp/write_memory.cfg
+- ios_config:
+    src: /tmp/write_memory.cfg

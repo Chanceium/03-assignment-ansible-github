@@ -1,0 +1,9 @@
+{% for router in routers %}
+router ospf 1
+{% for interface in router.interfaces %}
+ network {{ interface.ip_address }} {{ interface.wildcard_mask }} area {{ interface.ospf_area }}
+{% endfor %}
+{% for vlan_interface in router.vlan_interfaces %}
+ network {{ vlan_interface.ip_address }} {{ vlan_interface.wildcard_mask }} area {{ vlan_interface.ospf_area }}
+{% endfor %}
+{% endfor %}

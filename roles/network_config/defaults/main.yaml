@@ -1,0 +1,6 @@
+# network_config/defaults/main.yaml
+---
+username: "chance"
+user_password: "telecomS144"
+enable_password: "telecomS144"
+
