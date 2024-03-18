@@ -1,0 +1,2 @@
+ansible-playbook --vault-password-file vault_password.txt -i inventory.ini run_network_config.yaml 
+
