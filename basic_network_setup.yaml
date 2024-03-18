@@ -1,0 +1,11 @@
+basic_network_setup.yaml
+---
+- name: basic_network_setup
+  hosts: Routers
+  gather_facts: no
+
+  tasks:
+    - name: Change hostname
+      ios_config:
+        lines:
+          - hostname {{inventory_hostname}} #Changes all hostnames of Routers to ones defined in inventory file
