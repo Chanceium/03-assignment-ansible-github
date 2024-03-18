@@ -10,12 +10,47 @@
         lines:
           - hostname {{ inventory_hostname }}
 
+    - name: Set local password
+      ios_config:
+        lines:
+          - enable secret {{ enable_password }}
+          - username {{ username }} secret {{ user_password }}
+      vars:
+        enable_password: "telecomS144"
+        username: "chance"
+        user_password: "telecomS144"
+
+    - name: Configure SSH and disable Telnet
+      ios_config:
+        lines:
+          - ip ssh version 2
+          - line vty 0 15
+          - transport input ssh
+
+    - name: Limit console and VTY access
+      ios_config:
+        lines:
+          - line console 0
+          - login local
+          - exec-timeout 5
+          - line vty 0 4
+          - login local
+          - exec-timeout 15
+
+    - name: Configure logging and timestamps
+      ios_config:
+        lines:
+          - service timestamps debug datetime msec
+          - service timestamps log datetime msec
+          - logging buffered 5000
+
     - name: Configure R1
       ios_config:
         lines:
           - interface G0/0
           - ip address 100.64.1.1 255.255.255.252
           - no shut
+          - do write memory
       when: inventory_hostname == 'R1'
 
     - name: Configure R2
@@ -27,6 +62,7 @@
           - interface G1/0
           - ip address 100.64.2.1 255.255.255.252
           - no shut
+          - do write memory
       when: inventory_hostname == 'R2'
 
     - name: Configure R3
@@ -35,4 +71,40 @@
           - interface G1/0
           - ip address 100.64.2.2 255.255.255.252
           - no shut
+          - do write memory
       when: inventory_hostname == 'R3'
+
+    - name: Configure VLANs for R1
+      ios_config:
+        lines:
+          - interface G0/0.10
+          - encapsulation dot1Q 10
+          - ip address 192.168.10.1 255.255.255.0
+          - no shut
+          - do write memory
+      when: inventory_hostname == 'R1'
+
+    - name: Configure VLANs for R2
+      ios_config:
+        lines:
+          - interface G0/0.10
+          - encapsulation dot1Q 10
+          - ip address 192.168.10.2 255.255.255.0
+          - no shut
+          - interface G1/0.20
+          - encapsulation dot1Q 10
+          - ip address 192.168.20.1 255.255.255.0
+          - no shut
+          - do write memory
+      when: inventory_hostname == 'R2'
+      
+    - name: Configure VLANs for R3
+      ios_config:
+        lines:
+          - interface G1/0.20
+          - encapsulation dot1Q 10
+          - ip address 192.168.20.2 255.255.255.0
+          - no shut
+          - do write memory
+      when: inventory_hostname == 'R3'
+    
