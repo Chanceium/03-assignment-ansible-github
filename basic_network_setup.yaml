@@ -1,4 +1,4 @@
-basic_network_setup.yaml
+#basic_network_setup.yaml
 ---
 - name: basic_network_setup
   hosts: Routers
@@ -8,4 +8,31 @@ basic_network_setup.yaml
     - name: Change hostname
       ios_config:
         lines:
-          - hostname {{inventory_hostname}} #Changes all hostnames of Routers to ones defined in inventory file
+          - hostname {{ inventory_hostname }}
+
+    - name: Configure R1
+      ios_config:
+        lines:
+          - interface G0/0
+          - ip address 100.64.1.1 255.255.255.252
+          - no shut
+      when: inventory_hostname == 'R1'
+
+    - name: Configure R2
+      ios_config:
+        lines:
+          - interface G0/0
+          - ip address 100.64.1.2 255.255.255.252
+          - no shut
+          - interface G1/0
+          - ip address 100.64.2.1 255.255.255.252
+          - no shut
+      when: inventory_hostname == 'R2'
+
+    - name: Configure R3
+      ios_config:
+        lines:
+          - interface G1/0
+          - ip address 100.64.2.2 255.255.255.252
+          - no shut
+      when: inventory_hostname == 'R3'
