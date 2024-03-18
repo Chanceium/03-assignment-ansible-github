@@ -1,6 +1,8 @@
 #run_network_config.yaml
 ---
+---
 - hosts: Routers
+  gather_facts: no
   vars_files:
     - secret_vars.yaml
   roles:
