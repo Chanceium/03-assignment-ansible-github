@@ -1,0 +1,44 @@
+#routing_protocol_setup
+---
+- name: routing_protocol_setup
+  hosts: Routers
+  gather_facts: no
+
+  tasks:
+    - name: Configure OSPF on R1
+      template:
+        src: templates/ospf_config.j2
+        dest: /tmp/ospf_config.cfg
+      vars:
+        interface: "G0/0"
+    - ios_config:
+        src: /tmp/ospf_config.cfg
+      when: inventory_hostname == 'R1'
+
+    - name: Configure OSPF on R2
+      template:
+        src: templates/ospf_config.j2
+        dest: /tmp/ospf_config.cfg
+      vars:
+        interface: "G0/0"
+    - ios_config:
+        src: /tmp/ospf_config.cfg
+      when: inventory_hostname == 'R2'
+
+    - name: Configure OSPF on R3
+      template:
+        src: templates/ospf_config.j2
+        dest: /tmp/ospf_config.cfg
+      vars:
+        interface: "G1/0"
+    - ios_config:
+        src: /tmp/ospf_config.cfg
+      when: inventory_hostname == 'R3'
+
+    - name: Writing to memory
+      template:
+        src: templates/write_memory.j2
+        dest: /tmp/write_memory.cfg
+    - ios_config:
+        src: /tmp/write_memory.cfg
+
