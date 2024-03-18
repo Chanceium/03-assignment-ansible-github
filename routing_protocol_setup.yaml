@@ -14,6 +14,16 @@
     - ios_config:
         src: /tmp/ospf_config.cfg
       when: inventory_hostname == 'R1'
+      
+    - name: Configure OSPF on R1.10
+      template:
+        src: templates/ospf_config.j2
+        dest: /tmp/ospf_config.cfg
+      vars:
+        interface: "G0/0.10"
+    - ios_config:
+        src: /tmp/ospf_config.cfg
+      when: inventory_hostname == 'R1'
 
     - name: Configure OSPF on R2
       template:
@@ -24,13 +34,43 @@
     - ios_config:
         src: /tmp/ospf_config.cfg
       when: inventory_hostname == 'R2'
-
+      
+    - name: Configure OSPF on R2.10
+      template:
+        src: templates/ospf_config.j2
+        dest: /tmp/ospf_config.cfg
+      vars:
+        interface: "G0/0.10"
+    - ios_config:
+        src: /tmp/ospf_config.cfg
+      when: inventory_hostname == 'R2'
+      
+    - name: Configure OSPF on R2.20
+      template:
+        src: templates/ospf_config.j2
+        dest: /tmp/ospf_config.cfg
+      vars:
+        interface: "G0/0.20"
+    - ios_config:
+        src: /tmp/ospf_config.cfg
+      when: inventory_hostname == 'R2' 
+      
     - name: Configure OSPF on R3
       template:
         src: templates/ospf_config.j2
         dest: /tmp/ospf_config.cfg
       vars:
         interface: "G1/0"
+    - ios_config:
+        src: /tmp/ospf_config.cfg
+      when: inventory_hostname == 'R3'
+      
+    - name: Configure OSPF on R3.20
+      template:
+        src: templates/ospf_config.j2
+        dest: /tmp/ospf_config.cfg
+      vars:
+        interface: "G1/0.20"
     - ios_config:
         src: /tmp/ospf_config.cfg
       when: inventory_hostname == 'R3'
