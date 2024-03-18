@@ -1,0 +1,37 @@
+# network_config/vars/main.yaml
+---
+routers:
+  - name: R1
+    ansible_host: R1
+    ansible_connection: network_cli
+    ansible_user: "{{ username }}"
+    ansible_ssh_pass: "{{ user_password }}"
+    ansible_network_os: ios
+    interfaces: 
+      - { interface: "G0/0", ip_address: "100.64.1.1", subnet_mask: "255.255.255.252", ospf_area: "0", wildcard_mask: "0.0.0.3" }
+    vlan_interfaces:
+      - { interface: "G0/0.10", vlan_id: 10, ip_address: "192.168.10.1", subnet_mask: "255.255.255.0", ospf_area: "0", wildcard_mask: "0.0.0.255" }
+  - name: R2
+    ansible_host: R2
+    ansible_connection: network_cli
+    ansible_user: "{{ username }}"
+    ansible_ssh_pass: "{{ user_password }}"
+    ansible_network_os: ios
+    interfaces: 
+      - { interface: "G0/0", ip_address: "100.64.1.2", subnet_mask: "255.255.255.252", ospf_area: "0", wildcard_mask: "0.0.0.3" }
+      - { interface: "G1/0", ip_address: "100.64.2.1", subnet_mask: "255.255.255.252", ospf_area: "0", wildcard_mask: "0.0.0.3" }
+    vlan_interfaces:
+      - { interface: "G0/0.10", vlan_id: 10, ip_address: "192.168.10.2", subnet_mask: "255.255.255.0", ospf_area: "0", wildcard_mask: "0.0.0.255" }
+      - { interface: "G1/0.20", vlan_id: 20, ip_address: "192.168.20.1", subnet_mask: "255.255.255.0", ospf_area: "0", wildcard_mask: "0.0.0.255" }
+  - name: R3
+    ansible_host: R3
+    ansible_connection: network_cli
+    ansible_user: "{{ username }}"
+    ansible_ssh_pass: "{{ user_password }}"
+    ansible_network_os: ios
+    interfaces: 
+      - { interface: "G1/0", ip_address: "100.64.2.2", subnet_mask: "255.255.255.252", ospf_area: "0", wildcard_mask: "0.0.0.3" }
+    vlan_interfaces:
+      - { interface: "G1/0.20", vlan_id: 20, ip_address: "192.168.20.2", subnet_mask: "255.255.255.0", ospf_area: "0", wildcard_mask: "0.0.0.255" }
+
+

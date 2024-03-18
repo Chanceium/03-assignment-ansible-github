@@ -1,0 +1,5 @@
+# network_config/defaults/main.yaml
+---
+username: "{{ vault_username }}"
+user_password: "{{ vault_user_password }}"
+enable_password: "{{ vault_enable_password }}"
